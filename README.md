@@ -1,52 +1,93 @@
-🎓 Student Management API
+# 🎓 Student Management API
 
-A simple and efficient REST API built with FastAPI to manage student records, filter students by department, search by marks, and generate student performance summaries.
+A beginner-friendly REST API built with **Python and FastAPI** to retrieve student records, filter students by department, and calculate academic statistics.
 
-✨ Features
-📋 Retrieve all student records
-🔍 Find a student by ID
-🏫 Filter students by department
-📊 Search students by minimum marks
-📈 View total students and average marks
-⚡ Fast and interactive API documentation with Swagger UI
-🛠️ Tech Stack
-Language: Python
-Framework: FastAPI
-Server: Uvicorn
-📁 Project Structure
-Student-Management-API/
+This project demonstrates core backend development concepts, including API endpoints, path parameters, query parameters, JSON responses, HTTP status codes, and error handling.
+
+## 🚀 Features
+
+- 📋 **View All Students** — Retrieve all student records.
+- 🔍 **Get Student by ID** — Fetch an individual student's details.
+- 🏫 **Filter by Department** — Find students belonging to a particular department.
+- 📊 **Academic Summary** — Calculate the total number of students and average marks.
+- ⚠️ **Error Handling** — Return a `404 Not Found` response when a student ID does not exist.
+- 📖 **Interactive API Documentation** — Test endpoints using Swagger UI.
+- 🐍 **Python Type Hints** — Use typed path parameters for automatic validation.
+
+## 🛠️ Tech Stack
+
+- **Language:** Python
+- **Framework:** FastAPI
+- **Server:** Uvicorn
+- **API Format:** REST / JSON
+- **Documentation:** Swagger UI and ReDoc
+- **Development Environment:** Visual Studio Code
+
+## 📁 Project Structure
+
+```text
+student_api/
 ├── main.py
-├── README.md
-└── requirements.txt
+└── README.md
+```
 
-🚀 Getting Started
-1. Clone the repository
-git clone https://github.com/kirubanandhan016/Student-Management-API.git
-cd Student-Management-API
+## ⚙️ Installation and Setup
 
-2. Install dependencies
-pip install fastapi uvicorn
+### 1. Clone the repository
 
-3. Run the application
-uvicorn main:app --reload
+```bash
+git clone https://github.com/YOUR_USERNAME/student-management-api.git
+cd student-management-api
+```
 
-4. Explore the API
+Replace `YOUR_USERNAME` with your GitHub username and use your actual repository name.
 
-Once the server is running, open:
+### 2. Create a virtual environment
 
-Swagger UI: http://127.0.0.1:8000/docs
-ReDoc: http://127.0.0.1:8000/redoc
-📡 API Endpoints
-Method	Endpoint	Description
-GET	/students	Retrieve all students
-GET	/students/{student_id}	Retrieve a student by ID
-GET	/filter-students?department=ECE	Filter by department
-GET	/students/search/by-marks?min_marks=80	Search by minimum marks
-GET	/summary	Get student statistics
-💡 Example Response
+**Windows PowerShell**
 
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+### 3. Install dependencies
+
+```bash
+python -m pip install "fastapi[standard]"
+```
+
+### 4. Run the application
+
+```bash
+fastapi dev main.py
+```
+
+The API will be available at:
+
+`http://127.0.0.1:8000`
+
+## 🔗 API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/` | Check API status |
+| GET | `/students` | Retrieve all students |
+| GET | `/students/{student_id}` | Retrieve a student by ID |
+| GET | `/filter-students?department=ECE` | Filter students by department |
+| GET | `/summary` | Get student count and average marks |
+
+## 🧪 Example API Requests
+
+### 1. Retrieve all students
+
+```http
 GET /students
+```
 
+Example response:
+
+```json
 {
   "count": 3,
   "students": [
@@ -70,24 +111,91 @@ GET /students
     }
   ]
 }
+```
 
-📊 Student Summary
+### 2. Retrieve a student by ID
 
-The /summary endpoint provides:
+```http
+GET /students/1
+```
 
-Total number of students
-Average marks across all students
-🔮 Future Improvements
-Add, update, and delete student records
-Integrate a database such as MySQL or PostgreSQL
-Implement input validation and error handling
-Add authentication and authorization
-👨‍💻 Author
+Example response:
 
-Kirubanandhan
+```json
+{
+  "id": 1,
+  "name": "Arun",
+  "department": "ECE",
+  "marks": 85
+}
+```
 
-GitHub: @kirubanandhan016
+If the student does not exist, the API returns a `404 Not Found` response.
 
-⭐ If you find this project useful, consider giving it a star!
+### 3. Filter students by department
 
-Built with Python and FastAPI.
+```http
+GET /filter-students?department=ECE
+```
+
+Returns students belonging to the ECE department.
+
+### 4. View the academic summary
+
+```http
+GET /summary
+```
+
+Example response:
+
+```json
+{
+  "total_students": 3,
+  "average_marks": 85.0
+}
+```
+
+## 📖 Interactive Documentation
+
+After starting the server, open:
+
+- **Swagger UI:** http://127.0.0.1:8000/docs
+- **ReDoc:** http://127.0.0.1:8000/redoc
+
+Use these interfaces to inspect and test your API endpoints.
+
+## 🧠 Concepts Learned
+
+- FastAPI application setup
+- REST API fundamentals
+- HTTP GET requests
+- Path and query parameters
+- Python lists and dictionaries
+- Loops and conditional statements
+- JSON responses
+- HTTP exceptions and status codes
+- Automatic request validation
+- API documentation
+
+## 🔮 Future Enhancements
+
+- Add student creation using POST.
+- Implement student updates using PUT and PATCH.
+- Implement student deletion using DELETE.
+- Integrate an SQLite database for persistent storage.
+- Add Pydantic request and response models.
+- Write automated tests using Pytest.
+- Add pagination and search functionality.
+
+## 👨‍💻 Author
+
+**Kirubanandhan V**
+
+Electronics and Communication Engineering Graduate | Aspiring Python Backend Developer
+
+- GitHub: https://github.com/kirubanandhan016
+- LinkedIn: https://www.linkedin.com/in/kirubanandhan-v-98bb83443/
+
+## 📄 License
+
+This project is intended for educational and learning purposes. You may add an MIT License if you want to distribute it as an open-source project.
