@@ -36,11 +36,9 @@ student_api/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/student-management-api.git
-cd student-management-api
+git clone https://github.com/kirubanandhan016/Student-Management-API.git
+cd Student-Management-API
 ```
-
-Replace `YOUR_USERNAME` with your GitHub username and use your actual repository name.
 
 ### 2. Create a virtual environment
 
