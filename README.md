@@ -1,199 +1,133 @@
-# 🎓 Student Management API
+# Student Management API
 
-A beginner-friendly REST API built with **Python and FastAPI** to retrieve student records, filter students by department, and calculate academic statistics.
+A beginner-friendly REST API built with Python and FastAPI. It serves a small in-memory student dataset and demonstrates path parameters, query parameters, JSON responses, HTTP status codes, and automatic API documentation.
 
-This project demonstrates core backend development concepts, including API endpoints, path parameters, query parameters, JSON responses, HTTP status codes, and error handling.
+## Implemented functionality
 
-## 🚀 Features
+- Retrieve all students
+- Retrieve a student by ID
+- Filter students by department
+- Search students whose marks meet a minimum threshold
+- Calculate the student count and average marks
+- Return HTTP 404 when a requested student ID does not exist
 
-- 📋 **View All Students** — Retrieve all student records.
-- 🔍 **Get Student by ID** — Fetch an individual student's details.
-- 🏫 **Filter by Department** — Find students belonging to a particular department.
-- 📊 **Academic Summary** — Calculate the total number of students and average marks.
-- ⚠️ **Error Handling** — Return a `404 Not Found` response when a student ID does not exist.
-- 📖 **Interactive API Documentation** — Test endpoints using Swagger UI.
-- 🐍 **Python Type Hints** — Use typed path parameters for automatic validation.
+**Scope:** The current implementation is read-only. It does not yet provide student creation, update, or deletion endpoints, and it does not use a database. The sample data is defined in `main.py`.
 
-## 🛠️ Tech Stack
+## Technology
 
-- **Language:** Python
-- **Framework:** FastAPI
-- **Server:** Uvicorn
-- **API Format:** REST / JSON
-- **Documentation:** Swagger UI and ReDoc
-- **Development Environment:** Visual Studio Code
+Python 3 · FastAPI · Uvicorn · Pydantic validation · JSON · Swagger UI / ReDoc
 
-## 📁 Project Structure
+## Project structure
 
 ```text
-student_api/
+Student-Management-API/
 ├── main.py
 └── README.md
 ```
 
-## ⚙️ Installation and Setup
+## Installation
 
-### 1. Clone the repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/kirubanandhan016/Student-Management-API.git
 cd Student-Management-API
 ```
 
-### 2. Create a virtual environment
+Create and activate a virtual environment:
 
-**Windows PowerShell**
+Windows PowerShell:
 
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
+macOS/Linux:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install FastAPI with its standard development tools:
 
 ```bash
 python -m pip install "fastapi[standard]"
 ```
 
-### 4. Run the application
+## Run the API
 
 ```bash
 fastapi dev main.py
 ```
 
-The API will be available at:
+Base URL: `http://127.0.0.1:8000`
 
-`http://127.0.0.1:8000`
+Interactive documentation:
 
-## 🔗 API Endpoints
+- Swagger UI: `http://127.0.0.1:8000/docs`
+- ReDoc: `http://127.0.0.1:8000/redoc`
+
+## API endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/` | Check API status |
-| GET | `/students` | Retrieve all students |
-| GET | `/students/{student_id}` | Retrieve a student by ID |
+| GET | `/students` | Retrieve all students and the result count |
+| GET | `/students/{student_id}` | Retrieve one student by ID |
 | GET | `/filter-students?department=ECE` | Filter students by department |
-| GET | `/summary` | Get student count and average marks |
+| GET | `/students/search/by-marks?min_marks=80` | Find students at or above the minimum marks (default: 80) |
+| GET | `/summary` | Return total students and average marks |
 
-## 🧪 Example API Requests
+There is no `GET /` status route in the current source. Use the generated OpenAPI documentation to inspect the running application.
 
-### 1. Retrieve all students
+## Example requests
+
+Retrieve all students:
 
 ```http
 GET /students
 ```
 
-Example response:
-
-```json
-{
-  "count": 3,
-  "students": [
-    {
-      "id": 1,
-      "name": "Arun",
-      "department": "ECE",
-      "marks": 85
-    },
-    {
-      "id": 2,
-      "name": "Priya",
-      "department": "CSE",
-      "marks": 92
-    },
-    {
-      "id": 3,
-      "name": "Kumar",
-      "department": "ECE",
-      "marks": 78
-    }
-  ]
-}
-```
-
-### 2. Retrieve a student by ID
-
-```http
-GET /students/1
-```
-
-Example response:
-
-```json
-{
-  "id": 1,
-  "name": "Arun",
-  "department": "ECE",
-  "marks": 85
-}
-```
-
-If the student does not exist, the API returns a `404 Not Found` response.
-
-### 3. Filter students by department
+Filter by department:
 
 ```http
 GET /filter-students?department=ECE
 ```
 
-Returns students belonging to the ECE department.
+Search by marks:
 
-### 4. View the academic summary
+```http
+GET /students/search/by-marks?min_marks=80
+```
+
+Get the academic summary:
 
 ```http
 GET /summary
 ```
 
-Example response:
+The API returns JSON. Student records currently contain `id`, `name`, `department`, and `marks`.
 
-```json
-{
-  "total_students": 3,
-  "average_marks": 85.0
-}
-```
+## Error handling
 
-## 📖 Interactive Documentation
+A student ID that does not exist returns `404 Not Found`. FastAPI validates the integer path parameter and query parameter types automatically.
 
-After starting the server, open:
+## Tests
 
-- **Swagger UI:** http://127.0.0.1:8000/docs
-- **ReDoc:** http://127.0.0.1:8000/redoc
+An automated test suite is not currently present in this repository. Add Pytest and FastAPI TestClient tests before describing the API as fully tested.
 
-Use these interfaces to inspect and test your API endpoints.
+## Future improvements
 
-## 🧠 Concepts Learned
+- Add POST, PUT/PATCH, and DELETE endpoints.
+- Introduce Pydantic request and response models.
+- Persist student records with SQLAlchemy and SQLite/PostgreSQL.
+- Add pagination and more filtering.
+- Add Pytest coverage for successful requests, invalid inputs, and missing records.
 
-- FastAPI application setup
-- REST API fundamentals
-- HTTP GET requests
-- Path and query parameters
-- Python lists and dictionaries
-- Loops and conditional statements
-- JSON responses
-- HTTP exceptions and status codes
-- Automatic request validation
-- API documentation
-
-## 🔮 Future Enhancements
-
-- Add student creation using POST.
-- Implement student updates using PUT and PATCH.
-- Implement student deletion using DELETE.
-- Integrate an SQLite database for persistent storage.
-- Add Pydantic request and response models.
-- Write automated tests using Pytest.
-- Add pagination and search functionality.
-
-## 👨‍💻 Author
+## Author
 
 **Kirubanandhan V**
 
-Electronics and Communication Engineering Graduate | Aspiring Python Backend Developer
-
-- GitHub: https://github.com/kirubanandhan016
-- LinkedIn: https://www.linkedin.com/in/kirubanandhan-v-98bb83443/
-
-## 📄 License
-
-This project is intended for educational and learning purposes. You may add an MIT License if you want to distribute it as an open-source project.
+- GitHub: [@kirubanandhan016](https://github.com/kirubanandhan016)
+- LinkedIn: [Kirubanandhan V](https://www.linkedin.com/in/kirubanandhan-v-98bb83443/)
