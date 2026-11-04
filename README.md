@@ -26,7 +26,7 @@ This project demonstrates core backend development concepts, including API endpo
 ## 📁 Project Structure
 
 ```text
-student_api/
+Student-Management-API/
 ├── main.py
 └── README.md
 ```
