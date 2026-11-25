@@ -68,3 +68,24 @@ def test_summary_returns_average_and_handles_empty_dataset(client):
     empty_response = client.get("/summary")
     assert empty_response.status_code == 200
     assert empty_response.json() == {"total_students": 0, "average_marks": 0.0}
+
+
+def test_department_filter_trims_and_normalizes_response(client):
+    response = client.get("/filter-students", params={"department": "  ece  "})
+
+    assert response.status_code == 200
+    assert response.json()["department"] == "ECE"
+    assert response.json()["count"] == 2
+
+
+def test_department_filter_returns_empty_result_for_unknown_department(client):
+    response = client.get("/filter-students", params={"department": "MECH"})
+
+    assert response.status_code == 200
+    assert response.json() == {"department": "MECH", "count": 0, "students": []}
+
+
+def test_department_filter_rejects_blank_value(client):
+    response = client.get("/filter-students", params={"department": "   "})
+
+    assert response.status_code == 422
