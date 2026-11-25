@@ -29,12 +29,14 @@ def get_student(student_id: int):
 
 @app.get("/filter-students", summary="Filter students by department")
 def filter_students(department: str = Query(min_length=1, max_length=50)):
+    normalized_department = department.strip().upper()
+    if not normalized_department:
+        raise HTTPException(status_code=422, detail="Department must not be blank")
     result = [
         student
         for student in students
-        if student["department"].lower() == department.strip().lower()
+        if student["department"].upper() == normalized_department
     ]
-    normalized_department = department.strip().upper()
     return {
         "department": normalized_department,
         "count": len(result),
