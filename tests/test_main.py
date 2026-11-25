@@ -88,5 +88,4 @@ def test_department_filter_returns_empty_result_for_unknown_department(client):
 def test_department_filter_rejects_blank_value(client):
     response = client.get("/filter-students", params={"department": "   "})
 
-    assert response.status_code == 200
-    assert response.json()["count"] == 0
+    assert response.status_code == 422
