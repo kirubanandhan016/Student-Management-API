@@ -118,3 +118,25 @@ A useful next iteration would introduce Pydantic response models, SQLAlchemy 2.0
 ## Author
 
 **Kirubanandhan V** · [GitHub](https://github.com/kirubanandhan016) · [Portfolio](https://kirubanandhan016.github.io/) · [LinkedIn](https://www.linkedin.com/in/kirubanandhan-v-98bb83443/) · [Email](mailto:kirubanandhan016@gmail.com)
+
+
+## Request flow
+
+```mermaid
+flowchart TD
+    Client[HTTP client] --> FastAPI[FastAPI routes]
+    FastAPI --> Validate[Path and query validation]
+    Validate --> Data[In-memory sample records]
+    Data --> Filter[Lookup, filtering, aggregation]
+    Filter --> Response[JSON response or HTTP error]
+```
+
+## Verification
+
+Run the tests before opening a change:
+
+```bash
+python -m pytest -v
+```
+
+The CI workflow executes the endpoint tests on pushes and pull requests. Because the dataset is in memory, restart the application to reset any process-local state; this API currently exposes read-only operations.
