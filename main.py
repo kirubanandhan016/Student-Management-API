@@ -34,8 +34,9 @@ def filter_students(department: str = Query(min_length=1, max_length=50)):
         for student in students
         if student["department"].lower() == department.strip().lower()
     ]
+    normalized_department = department.strip().upper()
     return {
-        "department": department,
+        "department": normalized_department,
         "count": len(result),
         "students": result,
     }
