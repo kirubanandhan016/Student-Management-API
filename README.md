@@ -118,3 +118,14 @@ A useful next iteration would introduce Pydantic response models, SQLAlchemy 2.0
 ## Author
 
 **Kirubanandhan V** · [GitHub](https://github.com/kirubanandhan016) · [Portfolio](https://kirubanandhan016.github.io/) · [LinkedIn](https://www.linkedin.com/in/kirubanandhan-v-98bb83443/) · [Email](mailto:kirubanandhan016@gmail.com)
+
+
+## API documentation and project scope
+
+- Swagger/OpenAPI: run the server and open `/docs`; ReDoc is at `/redoc`.
+- Tests: `python -m pytest -v`; GitHub Actions runs the test suite.
+- This introductory implementation stores sample records in memory. A database ER diagram and `.env.example` are not applicable until persistent storage and environment-based configuration are added.
+
+## Screenshots and deployment
+
+No verified public deployment URL or committed screenshots are available yet. Capture Swagger UI and sample list/filter responses after running the API with non-personal sample data. Store approved images under `docs/screenshots/` and add a public URL only after deployment and health-check verification.
